@@ -7,9 +7,8 @@
   display: flex;
 }
 
-.temp,
-.day {
-  margin: 0;
+.temp, .day {
+  margin:0;
   text-align: center;
 }
 

@@ -12,55 +12,48 @@ export interface Command {
   providedIn: 'root'
 })
 export class NotificationsService {
-  messagesInput: Subject<Command>;
-  messagesOutput: Observable<Command[]>;
+  // messages: Subject<any>;
+  messageInput: Subject<Command>;
+  messageOutput: Observable<Command[]>;
 
   constructor() {
-    this.messagesInput = new Subject<Command>();
-    this.messagesOutput = this.messagesInput.pipe(
+    // this.messages = new Subject<any>();
+    this.messageInput = new Subject<Command>();
+    this.messageOutput = this.messageInput.pipe(
       scan((acc: Command[], value: Command) => {
         if (value.type === 'clear') {
           return acc.filter(message => message.id !== value.id);
-        } else {
+        }else{
           return [...acc, value];
         }
-      }, [])
-    );
+      },[])
+    )
   }
 
   addSuccess(message: string) {
+    // this.messages.next(message);
     const id = this.randomId();
-
-    this.messagesInput.next({
+    this.messageInput.next({
       id,
-      text: message,
-      type: 'success'
-    });
-
-    setTimeout(() => {
-      this.clearMesssage(id);
-    }, 5000);
+      type: 'success',
+      text: message
+    })
+    setTimeout(()=>{this.clearMesssage(id)}, 5000);
   }
 
   addError(message: string) {
+    // this.messages.next(message);
     const id = this.randomId();
-
-    this.messagesInput.next({
+    this.messageInput.next({
       id,
-      text: message,
-      type: 'error'
-    });
-
-    setTimeout(() => {
-      this.clearMesssage(id);
-    }, 5000);
+      type: 'error',
+      text: message
+    })
+    setTimeout(()=>{this.clearMesssage(id)}, 10000);
   }
 
   clearMesssage(id: number) {
-    this.messagesInput.next({
-      id,
-      type: 'clear'
-    });
+    this.messageInput.next({id, type:'clear'});
   }
 
   private randomId() {

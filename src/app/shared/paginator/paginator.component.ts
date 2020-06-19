@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -6,21 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent implements OnInit {
-  // TODO: make sure we receive this value from the parent component
-  numberOfPages = 5;
+  // todo: make sure we receiv this from the parent componenet
+  // @Input() numberOfPages: number;
+  numberOfPages= 4;
   currentPage = 1;
 
   pageOptions: number[];
 
   constructor() {
     this.pageOptions = [
-      this.currentPage - 2,
-      this.currentPage - 1,
+      this.currentPage -2,
+      this.currentPage -1,
       this.currentPage,
-      this.currentPage + 1,
-      this.currentPage + 2
-    ].filter(pageNumber => pageNumber >= 1 && pageNumber <= this.numberOfPages);
+      this.currentPage +1,
+      this.currentPage +2
+    ].filter(pageNumber => pageNumber >=1 && pageNumber <= this.numberOfPages);
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+  }
+
 }

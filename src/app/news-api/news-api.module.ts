@@ -4,9 +4,10 @@ import { NaArticleListComponent } from './na-article-list/na-article-list.compon
 import { TrimOutletNamePipe } from './trim-outlet-name.pipe';
 import { SharedModule } from '../shared/shared.module';
 
+
 @NgModule({
   declarations: [NaArticleListComponent, TrimOutletNamePipe],
-  imports: [CommonModule, SharedModule],
+  imports: [ CommonModule, SharedModule ],
   exports: [NaArticleListComponent]
 })
-export class NewsApiModule {}
+export class NewsApiModule { }

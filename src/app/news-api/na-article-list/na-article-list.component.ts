@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsApiService, Article } from '../news-api.service';
+import { Article, NewsApiService } from '../news-api.service';
 
 @Component({
   selector: 'app-na-article-list',
@@ -8,14 +8,21 @@ import { NewsApiService, Article } from '../news-api.service';
 })
 export class NaArticleListComponent implements OnInit {
   articles: Article[];
+  numberOfPages: number;
 
   constructor(private newsApiService: NewsApiService) {
     this.newsApiService.pagesOutput.subscribe(articles => {
       this.articles = articles;
+    })
+
+    this.newsApiService.numberOfPages.subscribe(x=>{
+      this.numberOfPages = x;
     });
 
     this.newsApiService.getPage(1);
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+  }
+
 }

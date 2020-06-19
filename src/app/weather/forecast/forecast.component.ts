@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ForecastService } from '../forecast.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-forecast',
@@ -8,11 +8,20 @@ import { ForecastService } from '../forecast.service';
   styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
-  forecast$: Observable<{ dateString: string; temp: number }[]>;
 
-  constructor(forecastService: ForecastService) {
+  // forecastData = [];
+  forecast$: Observable<{dateString: string; temp: number;}[]>;
+
+  constructor(forecastService: ForecastService){
+    // forecastService.getForecast()
+    // .subscribe(forecastData => {
+    //   console.log( forecastData );
+    //   this.forecastData = forecastData
+    // });
     this.forecast$ = forecastService.getForecast();
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+  }
+
 }
